@@ -108,6 +108,7 @@ namespace Calc2
             int nextOper;
             int countOper=0;
             Console.WriteLine(str);
+
             for (int i = 0; i < str.Length; i++)
             {
                 if (str[i] == '*' || str[i] == '/')
@@ -160,6 +161,11 @@ namespace Calc2
                 bool isMultyDev = false;
                 bool isEnabledMulty = true; 
                 Console.WriteLine(str);
+                //str = "0+1*(" + str + ')';
+                if (str[0] == '-' || str[0] == '+')
+                {
+                    str = "0" + str;
+                }
                 for (int i = 0; i < str.Length; i++)
                 {
                     if (str[i] == '+' || str[i] == '-')
@@ -267,17 +273,18 @@ namespace Calc2
                                 break;
                             }
 
-                            if (str[j] == '+' || str[j] == '-')
+                            if ((str[j] == '+' || str[j] == '-') && (str[j - 1] != '/' && str[j - 1] != '*'))
                             {
-                                numMultyDev = CountMultyDev(str.Substring(0, j));
+                                numMultyDev = CountMultyDev(str.Substring(0, j));////////
                                 break;
                             }
-
+                            i = j + 1;
                         }
                         num = numMultyDev;                      
                         isMultyDev = false;
                         isEnabledMulty = false;
                         countOper = countOper + 1;
+                        
                     }
 
                 }
